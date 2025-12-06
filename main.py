@@ -7,7 +7,6 @@ def getHTML(link):
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36'
     }
-
     try:
         response = requests.get(link, headers=headers)
         response.raise_for_status()
@@ -80,16 +79,16 @@ def writeHTML(html, filename):
     file.close()
 
 def main():
-    filename = input('Enter the name of the file to be created: ')
+    filename = input('Enter a title with no spaces for the article: ')
     link = input('Enter the link to the Star Tribune article: ')
 
     html = getHTML(link)
     # Optional if you want to view the HTML
-    writeHTML(html)
+    writeHTML(html, filename)
     strings = parseHTML(html)
     cleanedStrings = cleanStrings(strings)
     cleanerStrings = removeNoneStrings(cleanedStrings)
-    createMarkdown(cleanerStrings, filename)
+    createTextFile(cleanerStrings, filename)
 
 if __name__ == '__main__':
     main()
